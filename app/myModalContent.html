@@ -1,0 +1,36 @@
+<div class="modal-header">
+    
+     <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h3 style="text-align:center"> Enter Availibility</h3></div>
+<div class="modal-body ">
+    <form class="form-horizontal" role="form">
+        <div class="form-group" ng-hide="proceed">
+            <label for="Password" class="col-sm-2 control-label" >Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" name="password" class="btn btn-primary" placeholder="Enter password" ng-model="password"> </div>
+            
+            <div style="text-align:center" class="col-md-6 col-md-offset-3">
+                <br>
+                <button ng-click="confirmPass()" class="btn btn-success btn-block">Confirm Password</button>
+            </div>
+        </div>
+    </form>
+    <div class="form-group" ng-show="proceed" style="height:100px;">
+        <label for="weekAvail" class="col-sm-2 control-label">Week Avail</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="weekAvail" name="weekAvail" placeholder="Enter Weeks Availability out of 40 hours" ng-model="weekAvail" >
+            <br/>
+        </div>
+        <label for="QuarterAvail" class="col-sm-2 control-label">Quarter's Avail</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="QuarterAvail" name="QuarterAvail" placeholder="Enter Quarters Availability out of 520" ng-model="quarterAvail" > </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="modal-footer">
+    <div style="text-align:center">
+        <button type="button" class="btn btn-success" ng-click="done()">Save</button>
+        <button type="button" class="btn btn-default btn-sm btn-center" ng-click="cancel()">Cancel</button>
+    </div>
+    </div>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="confusionApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head
+         content must come *after* these tags -->
+    <title>ResourceR</title>
+    <!-- Bootstrap -->
+    <!-- build:css styles/main.css -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-social.css" rel="stylesheet">
+    <link href="styles/mystyles.css" rel="stylesheet">
+    <!-- endbuild -->
+    <!--     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+    <!--    <script src="../bower_components/jquery/dist/jquery.min.js"></script>-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-controller="MenuController">
+    <nav class="navbar  navbar-fixed-top"  style="background-color:#3F729B; color:floralwhite;"role="navigation">
+        <div class="container">
+            <div class="col-xs-8 " >
+                <div class="navbar-header" align="center">
+                    <h1>ResourceR <span class="badge" >BLR FSI</span></h1> </div>
+            </div>
+            <!--
+            <ul class="nav  navbar-inverse navbar-right">
+                <li>
+                    <h2><button  id = "loginbutton" style="color:#ffffff; text-decoration:none;" class="btn btn-success" ng-click="openModal()">
+                        <span class="glyphicon glyphicon-log-in"></span> BLR FSI</button>
+                       </h2> </li>
+            </ul>
+-->
+        </div>
+    </nav>
+    <!--
+    <div id="aboutMeModal" class="modal fade" role="dialog">
+        <div class="modal-dialog " style="width:700px" ng-repeat="asso1 in team|filter:{'name':assoSelected()}">
+             Modal content
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"> About {{asso1.name}} </h4> </div>
+                <div class="modal-body ">
+                    <dl class="dl-horizontal" ng-repeat="interface in asso1.interfaces"> <dt>Interface</dt>
+                        <dd>{{interface.name}}</dd> <dt>Interface Description</dt>
+                        <dd>{{interface.description}}</dd> <dt>Interface Status</dt>
+                        <dd>{{interface.status}}</dd> <dt>Interface clients</dt>
+                        <dd ng-repeat="client in interface.clients">{{client}}</dd>
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm btn-center" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+    <div class="container">
+        <div class="row row-content">
+            <div class="col-xs-12">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" ng-class="{active:isSelected(1)}"> <a role="tab" ng-click="select(1)"> Clinical FSI</a> </li>
+                    <li role="presentation" ng-class="{active:isSelected(2)}"> <a role="tab" ng-click="select(2)">Financial FSI</a> </li>
+                    <li role="presentation" ng-class="{active:isSelected(3)}"> <a role="tab" ng-click="select(3)">Data Migration</a> </li>
+                    <li role="presentation" ng-class="{active:isSelected(4)}"><a role="tab" ng-click="select(4)">Bridge</a></li>
+                </ul>
+                <ul class="media-list" ng-repeat="asso in team|filter:{'track':filtText}">
+                    <div class="tab-content">
+                        <li class="media">
+                            <div class="media-left media-middle">
+                                <a href ng-click="openModal(asso.name)"> <img class="media-object   img-thumbnail" ng-src={{asso.image}} alt="Associate image" width="100px"> </a>
+                            </div>
+                            <div class="media-body">
+                                <h2 class="media-heading">{{asso.name}}<span >  </span><span class="badge">   {{asso.designation}}</span></h2>
+                                <div class="col-md-3 col-xs-12"> Next Week's Availability:
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped active " role="progressbar" ng-attr-style="width:{{asso.nextWeeksAvail/40*100}}%"> {{(asso.nextWeeksAvail/40*100).toFixed(1)}}% </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-12 "> Quarter's Availability:
+                                    <div class="progress ">
+                                        <div class="progress-bar progress-bar-striped active " role="progressbar" ng-attr-style="width:{{asso.quartersAvail/520*100}}%"> {{(asso.quartersAvail/520*100).toFixed(1)}}% </div>
+                                    </div>
+                                </div>
+                               <!--  <div class="col-md-2 col-xs-12  col-md-offset-1"> <a type="button" class="btn btn-success" href="mailto:{{asso.email}}?Subject=Project%20Name:&amp;cc={{asso.ManagersEmail}}; DL_BLR_TECH_DEL_IntegInterop@cerner.com &amp;body=Send%20Via%20ResourceR:"><i class="fa fa-envelope-o"></i><span> </span> Assign Project </a> </div> -->
+                                <div class="col-md-2 col-xs-12  col-md-offset-1">
+                                    <!-- Trigger the modal with a button -->
+                                    <!-- <a type="button" data-toggle="modal" data-target="#aboutMeModal" ng-click="aboutMeModal(asso.name)"> -->
+                                        <!-- <h4>  <span class="glyphicon glyphicon-user"></span>About Me</h4> </a> -->
+                                </div>
+                            </div>
+<!--                             <p ng-show="showDetails" ng-repeat="interface in asso.interfaces"></p> -->
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer class="row-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4 align="center">© Karan Jariwala and Akash Verma </h4> </div>
+            </div>
+        </div>
+    </footer>
+</body>
+    
+<!-- build:js scripts/main.js -->
+<script src="bower_components/angular/angular.min.js"></script>
+
+<!--    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<!--<script src="../bower_components/jquery/dist/jquery.min.js"></script>-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js" integrity="sha256-S3XOFzlLRocTOXBeD/HwZFkD85nXpfArubD9CD0/ruY=" crossorigin="anonymous"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="scripts/app.js?v=1"></script>
+<script src="scripts/factory.js?v=1"></script>
+<!-- endbuild -->
+
+</html>
